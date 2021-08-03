@@ -78,7 +78,6 @@ export class AppComponent implements OnInit{
   async logCenter():Promise<void> {
     await this.loadMarkerData().then( (response)=>
     {
-      console.log("response in load marker data", response);
         this.centerMapOnMarkerBounds(response);
     }
     );
@@ -96,7 +95,6 @@ export class AppComponent implements OnInit{
       //let nearByStore = await JSON.parse(data);
 
       if(this.listNearStores.length > 0){
-      console.log("Five near Markets found", this.listNearStores);
       for(let i=0; i< this.listNearStores.length; i++){
         //console.log("nearByStore Dynamic", this.listNearStores[i]); //use i instead of 0
         
@@ -126,11 +124,11 @@ export class AppComponent implements OnInit{
 
   async getDirectionsToClickedStore(destLat: number, destLng: number ){
     
-    console.log("All values in play before call =>", this.latitude);
-    console.log("All values in play before call =>", this.longitude);
-    console.log("All values in play before call =>", destLat);
-    console.log("All values in play before call =>", destLng);
-    console.log("this map instance object => ", this.map);
+    //console.log("All values in play before call =>", this.latitude);
+    //console.log("All values in play before call =>", this.longitude);
+    //console.log("All values in play before call =>", destLat);
+    //console.log("All values in play before call =>", destLng);
+    //console.log("this map instance object => ", this.map);
 
     const directionsDisplay = new google.maps.DirectionsRenderer();
     this.renderer = directionsDisplay;
@@ -148,7 +146,7 @@ export class AppComponent implements OnInit{
 
   await this.locationService.getDirectionFromPoint2Point(this.latitude, this.longitude, destLat, destLng).then(
     (response)=>{
-      console.log("respuesta ApiClient antes de => ", response);
+      //console.log("respuesta ApiClient antes de => ", response);
       this.response = response;
       
     });
@@ -206,7 +204,7 @@ export class AppComponent implements OnInit{
             };
        
 
-            console.log("in bounds before LatLngBounds", northeast, southwest);
+            //console.log("in bounds before LatLngBounds", northeast, southwest);
         let bounds = new google.maps.LatLngBounds(
           this.asLatLng(southwest),
           this.asLatLng(northeast)
@@ -216,8 +214,8 @@ export class AppComponent implements OnInit{
   }
 
   renderDirections(mapVariable: any, response: any, request: any){
-    console.log("renderDirections request => ",request);
-    console.log("renderDirections response => ",response.routes);
+    //console.log("renderDirections request => ",request);
+    //console.log("renderDirections response => ",response.routes);
    // console.log("renderDirections response => ",response.routes);
     this.renderer.setOptions({ 
               directions : {
@@ -234,7 +232,7 @@ export class AppComponent implements OnInit{
     
 }
  asBounds(boundsObject: any){
-   console.log("boundsObject", boundsObject);
+   //console.log("boundsObject", boundsObject);
    
     return new google.maps.LatLngBounds(this.asLatLng(boundsObject.southwest),
                                     this.asLatLng(boundsObject.northeast));
@@ -251,12 +249,12 @@ export class AppComponent implements OnInit{
 
 routesHandler(routes: any){
   for(let x = 0; x < routes.length; x++){
-        console.log("total of routes found =>", routes.length);
+        //console.log("total of routes found =>", routes.length);
         routes[x].bounds = this.asBounds(routes[x].bounds);
         routes[x].overview_path = this.asPath(routes[x].overviewPolyline);
 
         for(let i = 0; i < routes[x].legs.length; i++){
-          console.log("total of legs found =>", routes[x].legs.length);
+         // console.log("total of legs found =>", routes[x].legs.length);
 
           routes[x].legs[i].start_location = this.asLatLng(routes[x].legs[i].startLocation);
           routes[x].legs[i].end_location   = this.asLatLng(routes[x].legs[i].endLocation);
@@ -265,8 +263,8 @@ routesHandler(routes: any){
           
 
             for(let z = 0; z < routes[x].legs[i].steps.length; z++){
-              console.log("total of steps found =>", routes[x].legs[i].steps.length);
-              console.log("passing the directions", routes[x].legs[i].steps[z].htmlInstructions);
+              //console.log("total of steps found =>", routes[x].legs[i].steps.length);
+              //console.log("passing the directions", routes[x].legs[i].steps[z].htmlInstructions);
               routes[x].legs[i].steps[z].start_location = this.asLatLng(routes[x].legs[i].steps[z].startLocation);
               routes[x].legs[i].steps[z].end_location = this.asLatLng(routes[x].legs[i].steps[z].endLocation);
               routes[x].legs[i].steps[z].instructions = routes[x].legs[i].steps[z].htmlInstructions;
@@ -284,10 +282,10 @@ routesHandler(routes: any){
 async callApi(Longitude: number, Latitude: number){
   console.log("insideCallApi");
   const url = `https://localhost/storeLocator/service/userLocation?lon=${Longitude}&lat=${Latitude}`
-  console.log(url);
+  //console.log(url);
   await this.locationService.sendUserLocationToService(Longitude, Latitude).then(
      (resp)=>{
-      console.log("response inside then", resp);
+      //console.log("response inside then", resp);
       
       for (let index = 0; index < resp.length; index++) {
         let values: nearByStore = { addressName: "", city: "", latitude: 0, longitude: 0 };
