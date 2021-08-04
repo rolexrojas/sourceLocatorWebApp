@@ -53,11 +53,6 @@ export class AppComponent implements OnInit{
        
        navigator.geolocation.getCurrentPosition(
          (position)=>{
-        //this.longitude = position.coords.longitude;
-       // this.latitude = position.coords.latitude;
-       //Hardcoded for test TODO
-        this.longitude = 4.921009;
-        this.latitude = 51.3063826;
         console.log("Geolocation coordinates", this.latitude, this.longitude);
         //this.storeCurrentLocation(longitude, latitude);
         
