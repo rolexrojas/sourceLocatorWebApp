@@ -40,7 +40,8 @@ export class AppComponent implements OnInit{
     mapTypeId: 'roadmap',
     zoomControl: true,
     scrollwheel: true,
-    disableDoubleClickZoom: true
+    disableDoubleClickZoom: true,
+    fullscreenControl: false
   };
 
   constructor(private locationService: locationService, private sanitized: DomSanitizer){
